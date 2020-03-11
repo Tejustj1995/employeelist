@@ -1,0 +1,28 @@
+{% extends 'employeedetails/base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    <div class="container">
+{{ form|crispy }}
+    </div>
+    <div class="row">
+
+    <button type="submit" class="btn btn-success"><i class="fas fa-database"></i>SUBMIT</button>
+
+
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+
+    <button type="reset" class="btn btn-success">RESET</button>
+
+
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+
+
+    <a href="{% url 'employee_list'  %}" class="btn btn-secondary btn-success">EMPLOYEE LIST</a>
+
+    </div>
+</form>
+{% endblock content%}

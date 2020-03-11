@@ -1,0 +1,44 @@
+{% extends 'employeedetails/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1 align="center">Employee Details</h1>
+
+
+<a href="{% url 'employee_search' %}" class="btn btn-secondary btn-success">Search</a>
+
+<table class="table">
+    <thread class="border-bottom font-weight-bold">
+        <tr>
+            <td>ID:</td>
+            <td>EMP Code:</td>
+            <td>Full Name:</td>
+            <td>Mobile:</td>
+            <td>Position</td>
+            <td><a href="{% url 'employee_insert'  %}" class="btn btn-secondary btn-success">
+            INSERT NEW</a>
+            </td>
+        </tr>
+    </thread>
+    <tbody>
+    {% for employee in employee_list %}
+        <tr>
+            <td>{{ employee.id }}</td>
+             <td>{{ employee.empcode }}</td>
+            <td>{{ employee.fullname }}</td>
+            <td>{{ employee.mobile }}</td>
+            <td>{{ employee.position }}</td>
+            <td>
+                <a href="{% url 'employee_update' employee.id %}" class="btn text-secondary px-0">
+                    UPDATE</a>
+            </td>
+            <td>
+            <form action="{% url 'employee_delete' employee.id  %}" method="post">
+                 {% csrf_token %}
+                 <button type="submit" class="btn">DELETE</button>
+             </form>
+            </td>
+        </tr>
+    {% endfor%}
+    </tbody>
+</table>
+{% endblock content%}

@@ -1,0 +1,46 @@
+{% extends 'employeedetails/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1 align="center">Employee Details</h1>
+
+<form  method="post" action="">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" class="btn btn-primary" value="Search"/>
+</form>
+<table class="table">
+    <thread class="border-bottom font-weight-bold">
+        <tr>
+            <td>ID:</td>
+            <td>EMP Code:</td>
+            <td>Full Name:</td>
+            <td>Mobile:</td>
+            <td>Position</td>
+            <td><a href="{% url 'employee_insert'  %}" class="btn btn-secondary btn-success">
+            INSERT NEW</a>
+            </td>
+        </tr>
+    </thread>
+    <tbody>
+    {% for q in queryset %}
+        <tr>
+            <td>{{ q.id }}</td>
+             <td>{{ q.empcode }}</td>
+            <td>{{ q.fullname }}</td>
+            <td>{{ q.mobile }}</td>
+            <td>{{ q.position }}</td>
+            <td>
+                <a href="{% url 'employee_update' q.id %}" class="btn text-secondary px-0">
+                    UPDATE</a>
+            </td>
+            <td>
+            <form action="{% url 'employee_delete' q.id  %}" method="post">
+                 {% csrf_token %}
+                 <button type="submit" class="btn">DELETE</button>
+             </form>
+            </td>
+        </tr>
+    {% endfor%}
+    </tbody>
+</table>
+{% endblock content %}
